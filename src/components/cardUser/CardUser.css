@@ -1,31 +1,36 @@
 .UserText {
-    border: 1px solid #000000;
-    border-radius: 6px;
-    padding: 40px 30px 30px 30px;
     text-align: center;
-    line-height: 10px;
+    word-wrap: break-word;
 }
 .UserText h1{
-    text-transform: uppercase;
+    margin: 0;
     font-size: 24px;
     font-weight: 500;
+    text-transform: uppercase;
 }
 .UserText p{
+    margin: 0;
     color: #646464;
     font-size: 15px;
     font-weight: 100;
 }
 .User img{
+    top: -60px;
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border: 1px solid #000000;
+    position: absolute;
     border-radius: 50%;
-    transform: translateY(40px);
+    border: 1px solid #000000;
 }
 .User{
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    width: 250px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #000000;
+    padding: 40px 30px 30px 30px;
 }
