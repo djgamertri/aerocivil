@@ -1,3 +1,4 @@
+import { StepEdge } from 'reactflow'
 import CardUser from '../components/cardUser/CardUser'
 
 export const treeData = {
@@ -62,3 +63,4 @@ export const initialEdges = [
 ]
 
 export const nodeTypes = { User: CardUser }
+export const edgeTypes = { default: StepEdge }

@@ -1,12 +1,11 @@
 import React from 'react'
 import './Button.css'
 
-function Button ({ icon, text }) {
+function Button ({ icon, text, onClick }) {
   return (
-    <div className='Button'>
+    <div className='Button' onClick={onClick}>
       {icon}
       {text ? <div className='text'>{text}</div> : null}
-
     </div>
   )
 }
