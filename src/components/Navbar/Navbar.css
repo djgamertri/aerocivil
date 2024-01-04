@@ -1,0 +1,19 @@
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #fefefe;
+    padding: 4px 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    box-shadow: 3px 13px 59px -21px rgba(0,0,0,1);
+}
+.nav .Button{
+    box-shadow: none;
+    border: 1px solid #fefefe;
+}
+
+.nav .Button:hover{
+    border: 1px solid #6965db;
+}

@@ -1,31 +1,19 @@
 import React, { useCallback } from 'react'
-import CardUser from './components/cardUser/CardUser'
+import { FaUser } from 'react-icons/fa6'
+import Button from './components/Button/Button'
 import ReactFlow, {
   MiniMap,
   Controls,
   Background,
   useNodesState,
   useEdgesState,
-  addEdge
+  addEdge,
+  Panel
 } from 'reactflow'
 import './App.css'
 import 'reactflow/dist/style.css'
-
-const initialNodes = [
-  { id: '1', type: 'User', position: { x: 528, y: -204 }, data: { name: 'Esmeralda Molina Gomez', rol: 'Secretaria General', img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg' } },
-  { id: '2', type: 'User', position: { x: 528, y: 112 }, data: { name: 'Jhon Doe', rol: 'Director de Operaciones', img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg' } },
-  { id: '3', type: 'User', position: { x: 900, y: 112 }, data: { name: 'Jhon Doe', rol: 'Gerente de Marketing', img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg' } },
-  { id: '4', type: 'User', position: { x: 528, y: 383 }, data: { name: 'Jhon Doe', rol: 'Gerente de Recursos Humanos', img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg' } }
-
-]
-const initialEdges = [
-  { id: 'SC1-2', type: 'step', source: '1', target: '2' },
-  { id: 'SC1-3', type: 'step', source: '1', target: '3' },
-  { id: 'SC2-4', type: 'step', source: '2', target: '4' }
-
-]
-
-const nodeTypes = { User: CardUser }
+import { initialEdges, initialNodes, nodeTypes } from './assets/data'
+import Navbar from './components/Navbar/Navbar'
 
 export default function App () {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
@@ -36,10 +24,8 @@ export default function App () {
     [setEdges]
   )
 
-  console.log(nodes)
-
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100%', height: '100vh' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -48,6 +34,8 @@ export default function App () {
         onConnect={onConnect}
         nodeTypes={nodeTypes}
       >
+        <Panel position='top-right'><Button icon={<FaUser />} /></Panel>
+        <Navbar />
         <Controls />
         <MiniMap />
         <Background variant='dots' gap={12} size={1} />
