@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { FaUser } from 'react-icons/fa6'
 import Button from './components/Button/Button'
 import ReactFlow, {
@@ -15,13 +15,12 @@ import './App.css'
 import 'reactflow/dist/style.css'
 import { edgeTypes, initialEdges, initialNodes, nodeTypes } from './assets/data'
 import Navbar from './components/Navbar/Navbar'
+import Modal from './components/Modal/Modal'
 
 export default function App () {
   const edgeUpdateSuccessful = useRef(true)
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-
-  console.log(nodes)
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -47,6 +46,8 @@ export default function App () {
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
+      {/* <Modal /> */}
+
       <ReactFlow
         nodes={nodes}
         edges={edges}
