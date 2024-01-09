@@ -1,25 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './modal.css'
 
-const Modal = ({ isOpen, closeModal }) => {
-  useEffect(() => {
-    const keyup = (e) => {
-      if (e.key === 'Escape') {
-        closeModal()
-      }
-    }
-    if (isOpen) {
-      document.addEventListener('keyup', keyup)
-    } else {
-      document.removeEventListener('keyup', keyup)
-    }
-    return () => {
-      document.removeEventListener('keyup', keyup)
-    }
-  }, [isOpen, closeModal])
-
-  if (!isOpen) return null
-
+const Modal = ({ id, isOpen, closeModal }) => {
   return (
     <div className='modal'>
       <div className='User'>
