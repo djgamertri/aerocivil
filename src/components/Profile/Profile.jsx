@@ -1,29 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import './Profile.css'
+import LogoutProfile from './LogoutProfile'
+import { FaDoorOpen } from 'react-icons/fa6'
 
-const Profile = ({ isOpen, closeModal }) => {
+function Profile ({ icon }) {
   const { user, isAuthenticated } = useAuth0()
+  const [logoutVisible, setLogoutVisible] = useState(false)
 
-  console.log('Se ha accedido al perfil')
-  console.log('El estado de isOpen es:', isOpen)
+  const handleMouseEnter = () => {
+    setLogoutVisible(true)
+  }
+
+  const handleMouseLeave = () => {
+    setLogoutVisible(false)
+  }
 
   return (
-    <div>
-      {isOpen && (
-        <div className='modal'>
-          <div className='modal-content'>
-            <span className='close' onClick={closeModal}>&times;</span>
-            {isAuthenticated && (
-              <div>
-                <img src={user.picture} alt={user.name} />
-                <h2>{user.name}</h2>
-                <p>{user.email}</p>
-              </div>
-            )}
+    <div
+      className='profile'
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {isAuthenticated && (
+        <div style={{ cursor: 'pointer' }}>
+          <div className='Profile'>
+            <img src={user.picture} alt={user.name} />
+            <div className='ProfileText'>
+              <h1>{user.name}</h1>
+              <p>{user.email}</p>
+            </div>
           </div>
         </div>
       )}
+      {logoutVisible && <LogoutProfile icon={<FaDoorOpen />} />}
     </div>
   )
 }
