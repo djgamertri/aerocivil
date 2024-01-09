@@ -1,33 +1,40 @@
 /* En tu archivo Profile.css */
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #555;
-  }
-  
-  /* Agrega estilos específicos según tus necesidades */
-  
+.Profile{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 270px;
+  height: 100px;
+  border-radius: 6px;
+  border: 1px solid #dbdbdb;
+  padding: 5px 5px 5px 5px;
+}
+.Profile img{
+  top: 15%;
+  left: 5%;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid #000000;
+}
+.ProfileText {
+  top: 17%;
+  left: 34%;
+  position: absolute;
+  word-wrap: break-word;
+}
+.ProfileText h1{
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.ProfileText p{
+  margin: 0;
+  color: #646464;
+  font-size: 11px;
+  font-weight: 100;
+}

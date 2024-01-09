@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react'
-import { FaUser, FaDoorOpen } from 'react-icons/fa6'
+import { FaUser } from 'react-icons/fa6'
 import Button from './components/Button/Button'
 import ReactFlow, {
   MiniMap,
@@ -16,7 +16,6 @@ import 'reactflow/dist/style.css'
 import { edgeTypes, initialEdges, initialNodes, nodeTypes } from './assets/data'
 import Navbar from './components/Navbar/Navbar'
 import { useAuth0 } from '@auth0/auth0-react'
-import LogoutProfile from './components/Profile/LogoutProfile'
 import Profile from './components/Profile/Profile'
 
 export default function App () {
@@ -67,12 +66,11 @@ export default function App () {
       >
         {
           isAuthenticated
-            ? <Panel position='top-right'><LogoutProfile icon={<FaDoorOpen />} /></Panel>
+            ? <Panel position='top-right'><Profile /></Panel>
 
             : <Panel position='top-right'><Button icon={<FaUser />} onClick={() => loginWithRedirect()} /></Panel>
         }
         <Navbar setNodes={setNodes} nodes={nodes} />
-        <Profile />
         <Controls />
         <MiniMap />
         <Background variant='dots' gap={12} size={1} />
