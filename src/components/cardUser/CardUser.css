@@ -7,6 +7,10 @@
     font-size: 24px;
     font-weight: 500;
     text-transform: uppercase;
+    cursor: pointer;
+}
+.UserText h1:hover{
+    text-decoration: underline;
 }
 .UserText p{
     margin: 0;
