@@ -1,5 +1,4 @@
 .modal {
-    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -16,13 +15,11 @@
 }
 .HistoryText{
     width: 70%;
-    max-width: 1000px;
     height: -webkit-fill-available;
     padding: 50px 80px;
     border: 1px solid #000;
     border-radius: 6px;
     position: relative;
-    overflow-y: scroll;
 }
 .HistoryText::-webkit-scrollbar{
 	width: 10px;
@@ -37,6 +34,12 @@
     background: #ffffff;
     z-index: 9999999;
     margin-bottom: 10px;
+}
+.modal .User h1{
+    cursor: text;
+}
+.modal .User h1:hover{
+    text-decoration: none;
 }
 .HistoryText p{
     color: #6F7179;

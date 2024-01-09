@@ -1,40 +1,40 @@
-/* En tu archivo Profile.css */
-.Profile{
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 270px;
-  height: 100px;
-  border-radius: 6px;
-  border: 1px solid #dbdbdb;
-  padding: 5px 5px 5px 5px;
+.Profile {
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: .625rem;
+    border-radius: .3rem;
+    background-color: #fefefe;
+    border: 1px solid #dbdbdb;
+    box-shadow: 7px 11px 22px -13px rgba(0,0,0,0.75);
+    transition: all ease-in-out .2s;
+    margin-bottom: 7px;
 }
 .Profile img{
-  top: 15%;
-  left: 5%;
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid #000000;
+    width: 50px;
 }
-.ProfileText {
-  top: 17%;
-  left: 34%;
-  position: absolute;
-  word-wrap: break-word;
+.ProfileText{
+    cursor: text;
+    font-size: 12px;
+    transition: opacity 0.3s ease-in-out;
 }
 .ProfileText h1{
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  text-transform: uppercase;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 .ProfileText p{
-  margin: 0;
-  color: #646464;
-  font-size: 11px;
-  font-weight: 100;
+    margin: 0;
+    color: #646464;
+    font-size: 12px;
+    font-weight: 100;
+}
+.Profile .Button{
+    box-shadow: none;
+}
+.visible {
+    opacity: 1;
 }
