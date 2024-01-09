@@ -1,0 +1,43 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column  ;
+    padding: 3rem 1rem;
+    padding-bottom: 0;
+    background: white;
+    transition: all 0.35s ease-in;
+    z-index: 99999999;
+}
+.HistoryText{
+    width: 70%;
+    max-width: 1000px;
+    height: -webkit-fill-available;
+    padding: 50px 80px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    position: relative;
+    overflow-y: scroll;
+}
+.HistoryText::-webkit-scrollbar{
+	width: 10px;
+}
+
+.HistoryText::-webkit-scrollbar-thumb{
+    border-radius: 6px;
+	background-color: #cfcfcf;
+}
+.modal .User{
+    transform: translateY(50px);
+    background: #ffffff;
+    z-index: 9999999;
+    margin-bottom: 10px;
+}
+.HistoryText p{
+    color: #6F7179;
+}
