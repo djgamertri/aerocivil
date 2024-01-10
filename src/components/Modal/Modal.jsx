@@ -1,6 +1,8 @@
 import React from 'react'
 import './Modal.css'
+import { FaAngleLeft } from 'react-icons/fa6'
 import { userInfo } from '../../assets/data'
+import { Link } from 'react-router-dom'
 
 const Modal = ({ id }) => {
   const user = userInfo.find((user) => user.id === id)
@@ -13,6 +15,11 @@ const Modal = ({ id }) => {
 
   return (
     <div className='modal'>
+      <Link to='/'>
+        <button className='btn'>
+          <FaAngleLeft />
+        </button>
+      </Link>
       <div className='User'>
         <img
           src={img}

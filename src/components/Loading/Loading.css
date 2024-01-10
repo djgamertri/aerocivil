@@ -1,0 +1,25 @@
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+}
+
+.loading-message {
+    font-size: 40px;
+    font-weight: bold;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 1s infinite alternate;
+}
+
+@keyframes fadeInOut {
+    0% {
+    opacity: 0.5;
+    }
+    100% {
+    opacity: 1;
+    }
+}

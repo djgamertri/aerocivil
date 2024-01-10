@@ -13,6 +13,25 @@
     transition: all 0.35s ease-in;
     z-index: 99999999;
 }
+
+.btn{
+    top: 10px;
+    left: 10px;
+    width: 2.8%;
+    height: 5%;
+    padding-right: 2%;
+    position: absolute;
+    transition: 0.5s all ease-in-out;
+    border: 0;
+    font-size: 40px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #3464b7;
+    color: white;
+}
 .HistoryText{
     width: 70%;
     height: -webkit-fill-available;
