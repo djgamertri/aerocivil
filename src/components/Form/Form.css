@@ -1,0 +1,55 @@
+.node-editor {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.node-editor h1 {
+    font-size: 1.5rem;
+}
+.node-editor label {
+    font-size: .9rem;
+}
+.node-editor input, textarea {
+  padding: 8px;
+  margin-bottom: 10px;
+  resize: none;
+}
+
+.close-button {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 5px;
+  color: black;
+  font-size: 30px;
+  top: 4px;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.Submit {
+  background-color: #3464b7;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s all ease-in-out;
+}
+
+.Submit:hover {
+  background-color: #141a8d;
+}
+
+.form-content{
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: column;
+}

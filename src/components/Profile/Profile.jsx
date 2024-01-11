@@ -18,6 +18,8 @@ function Profile ({ icon }) {
     setLogoutVisible(false)
   }
 
+  console.log(logoutVisible)
+
   return (
     <Panel position='top-right'>
       <div

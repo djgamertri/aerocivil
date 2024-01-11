@@ -37,4 +37,5 @@
     border-radius: 6px;
     border: 1px solid #000000;
     padding: 40px 30px 30px 30px;
+    cursor: pointer;
 }

@@ -1,10 +1,11 @@
 import React from 'react'
 import './Loading.css'
+import { GridLoader } from 'react-spinners'
 
 function Loading () {
   return (
     <div className='loading-container'>
-      <div className='loading-message'>Cargando...</div>
+      <GridLoader color='#36d7b7' />
     </div>
   )
 }

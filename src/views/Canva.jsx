@@ -7,7 +7,6 @@ import Profile from '../components/Profile/Profile'
 import Navbar from '../components/Navbar/Navbar'
 import Loading from '../components/Loading/Loading'
 import 'reactflow/dist/style.css'
-import './Canva.css'
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -16,8 +15,12 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
   Panel,
-  updateEdge
+  updateEdge,
+  getIncomers,
+  getOutgoers,
+  getConnectedEdges
 } from 'reactflow'
+import Form from '../components/Form/Form'
 
 function Canva () {
   const edgeUpdateSuccessful = useRef(true)
@@ -48,6 +51,27 @@ function Canva () {
     edgeUpdateSuccessful.current = true
   }, [])
 
+  const onNodesDelete = useCallback(
+    (deleted) => {
+      setEdges(
+        deleted.reduce((acc, node) => {
+          const incomers = getIncomers(node, nodes, edges)
+          const outgoers = getOutgoers(node, nodes, edges)
+          const connectedEdges = getConnectedEdges([node], edges)
+
+          const remainingEdges = acc.filter((edge) => !connectedEdges.includes(edge))
+
+          const createdEdges = incomers.flatMap(({ id: source }) =>
+            outgoers.map(({ id: target }) => ({ id: `${source}->${target}`, source, target }))
+          )
+
+          return [...remainingEdges, ...createdEdges]
+        }, edges)
+      )
+    },
+    [nodes, edges]
+  )
+
   const handleNodeBlur = (event) => {
     if (event.relatedTarget && event.relatedTarget.type !== 'text') {
       setEditingNodeId(null)
@@ -55,8 +79,7 @@ function Canva () {
     }
   }
 
-  const handleNodeDoubleClick = (event, node) => {
-    // Evita que el formulario se cierre al hacer doble clic dentro de él
+  const handleNodeClick = (event, node) => {
     event.stopPropagation()
     event.preventDefault()
 
@@ -67,7 +90,6 @@ function Canva () {
   const handleNodeChange = (event) => {
     setEditNodeInfo((prevInfo) => ({ ...prevInfo, [event.target.name]: event.target.value }))
 
-    // Actualizar los nodos directamente al cambiar los campos de texto
     const updatedNodes = nodes.map((n) =>
       n.id === editingNodeId ? { ...n, data: { ...n.data, ...editNodeInfo, [event.target.name]: event.target.value } } : n
     )
@@ -100,6 +122,7 @@ function Canva () {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
+        onNodesDelete={onNodesDelete}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onEdgeUpdate={onEdgeUpdate}
@@ -107,7 +130,7 @@ function Canva () {
         onEdgeUpdateEnd={onEdgeUpdateEnd}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
-        onNodeDoubleClick={handleNodeDoubleClick}
+        onNodeClick={handleNodeClick}
         fitView
       >
         {isAuthenticated ? <Profile /> : <Panel position='top-right'><Button icon={<FaUser />} onClick={() => loginWithRedirect()} /></Panel>}
@@ -115,31 +138,7 @@ function Canva () {
         <Controls />
         <MiniMap />
         {editingNodeId && (
-          <div className='node-editor'>
-            <div className='close-button' onClick={handleCloseForm}>&times;</div>
-            <h1> Edición De Información </h1>
-            <label>
-              Nombre:
-              <input
-                type='text'
-                name='name'
-                value={editNodeInfo.name}
-                onChange={handleNodeChange}
-                onBlur={handleNodeBlur}
-              />
-            </label>
-            <label>
-              Email:
-              <input
-                type='text'
-                name='rol'
-                value={editNodeInfo.rol}
-                onChange={handleNodeChange}
-                onBlur={handleNodeBlur}
-              />
-            </label>
-            <button className='Submit' onClick={handleSaveChanges}>Guardar Cambios</button>
-          </div>
+          <Form handleCloseForm={handleCloseForm} editNodeInfo={editNodeInfo} handleNodeChange={handleNodeChange} handleNodeBlur={handleNodeBlur} handleSaveChanges={handleSaveChanges} />
         )}
         <Background variant='dots' gap={12} size={1} />
       </ReactFlow>
