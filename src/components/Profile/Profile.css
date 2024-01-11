@@ -8,7 +8,7 @@
     border-radius: .3rem;
     background-color: #fefefe;
     border: 1px solid #dbdbdb;
-    box-shadow: 7px 11px 22px -13px rgba(0,0,0,0.75);
+    box-shadow: 7px 0 22px -12px rgba(0,0,0,0.75);
     transition: all ease-in-out .2s;
     margin-bottom: 7px;
 }
