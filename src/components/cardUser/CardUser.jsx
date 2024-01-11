@@ -7,7 +7,6 @@ import { motion } from 'framer-motion'
 function CardUser ({ data, id }) {
   const navigate = useNavigate()
 
-  console.log(id)
   const handleNameClick = () => {
     navigate(`/Profile/${id}`)
   }

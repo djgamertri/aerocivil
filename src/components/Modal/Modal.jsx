@@ -1,8 +1,9 @@
 import React from 'react'
 import './Modal.css'
-import { FaAngleLeft } from 'react-icons/fa6'
+import { FaArrowLeft } from 'react-icons/fa'
 import { userInfo } from '../../assets/data'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const Modal = ({ id }) => {
   const user = userInfo.find((user) => user.id === id)
@@ -14,30 +15,34 @@ const Modal = ({ id }) => {
   const { name, rol, img, Text } = user
 
   return (
-    <div className='modal'>
-      <Link to='/'>
-        <button className='btn'>
-          <FaAngleLeft />
-        </button>
-      </Link>
-      <div className='User'>
-        <img
-          src={img}
-          alt=''
-        />
-        <div className='UserText'>
-          <h1>{name}</h1>
-          <p>{rol}</p>
-        </div>
-      </div>
-      <div className='HistoryText'>
-        {Text.map((item, index) => (
-          <div key={index}>
-            <h2>{item.title}</h2>
-            <p>{item.data}</p>
-            {index < Text.length - 1 && <hr />}
+    <div>
+      <motion.div whileHover={{ translateX: -2 }} className='modal-link'>
+        <Link to='/'>
+          <FaArrowLeft />
+        </Link>
+      </motion.div>
+      <div className='modal'>
+        <motion.div className='User' initial={{ scale: 0, translateY: 500 }} animate={{ scale: 1, translateY: 50 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+          <img src={img} alt='' />
+          <div className='UserText'>
+            <h1>{name}</h1>
+            <p>{rol}</p>
           </div>
-        ))}
+        </motion.div>
+        <motion.div className='HistoryText' initial={{ scale: 0, translateY: 500 }} animate={{ scale: 1, translateY: 0 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+          {Text.map((item, index) => (
+            <motion.div
+              key={index} initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2 }}
+            >
+              <h2>{item.title}</h2>
+              <p>{item.data}</p>
+              {index < Text.length - 1 && <hr />}
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   )

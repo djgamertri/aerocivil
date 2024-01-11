@@ -3,6 +3,7 @@ import './Navbar.css'
 import Button from '../Button/Button'
 import { FaCirclePlus } from 'react-icons/fa6'
 import { Panel } from 'reactflow'
+import { motion } from 'framer-motion'
 
 function Navbar ({ setNodes }) {
   const getNodeId = () => `ID_${+new Date()}`
@@ -22,8 +23,9 @@ function Navbar ({ setNodes }) {
 
   return (
     <Panel position='top-center'>
-      <Button icon={<FaCirclePlus />} onClick={onAdd} />
-
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+        <Button icon={<FaCirclePlus />} onClick={onAdd} />
+      </motion.div>
     </Panel>
   )
 }

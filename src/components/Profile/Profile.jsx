@@ -4,6 +4,7 @@ import { RiLogoutCircleRLine } from 'react-icons/ri'
 import { Panel } from 'reactflow'
 import './Profile.css'
 import Button from '../Button/Button'
+import { motion } from 'framer-motion'
 
 function Profile ({ icon }) {
   const { user, logout } = useAuth0()
@@ -22,18 +23,20 @@ function Profile ({ icon }) {
 
   return (
     <Panel position='top-right'>
-      <div
-        className='Profile'
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <img src={user.picture} alt={user.name} />
-        <div className='ProfileText'>
-          <h1>{user.name}</h1>
-          <p>{user.email}</p>
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+        <div
+          className='Profile'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img src={user.picture} alt={user.name} />
+          <div className='ProfileText'>
+            <h1>{user.name}</h1>
+            <p>{user.email}</p>
+          </div>
         </div>
-      </div>
-      <Button text='Cerrar Sesion' icon={<RiLogoutCircleRLine />} onClick={logout} />
+        <Button text='Cerrar Sesion' icon={<RiLogoutCircleRLine />} onClick={logout} />
+      </motion.div>
     </Panel>
   )
 }
