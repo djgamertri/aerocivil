@@ -45,10 +45,6 @@ function Navbar ({ setNodes, setEdges, rfInstance }) {
     restoreFlow()
   }, [setNodes, setViewport])
 
-  useEffect(() => {
-    onSave()
-  }, [])
-
   return (
     <Panel position='top-center'>
       <motion.div className='nav' initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
