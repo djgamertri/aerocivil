@@ -28,6 +28,7 @@ function Canva () {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   const [editingNodeId, setEditingNodeId] = useState(null)
   const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '' })
+  const [rfInstance, setRfInstance] = useState(null)
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -131,10 +132,12 @@ function Canva () {
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         onNodeClick={handleNodeClick}
+        fitViewOptions={{ padding: 0.4 }}
         fitView
+        onInit={setRfInstance}
       >
-        {isAuthenticated ? <Profile /> : <Panel position='top-right'><Button icon={<FaUser />} onClick={() => loginWithRedirect()} /></Panel>}
-        <Navbar setNodes={setNodes} nodes={nodes} />
+        {isAuthenticated ? <Profile /> : <Panel position='top-right'><Button icon={<FaUser />} onClick={() => loginWithRedirect()} title='Ingresar al Sisitema' /></Panel>}
+        <Navbar setNodes={setNodes} setEdges={setEdges} rfInstance={rfInstance} />
         <Controls />
         <MiniMap />
         {editingNodeId && (

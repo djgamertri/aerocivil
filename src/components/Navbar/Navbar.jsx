@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import './Navbar.css'
 import Button from '../Button/Button'
-import { FaCirclePlus } from 'react-icons/fa6'
-import { Panel } from 'reactflow'
+import { FaArrowRotateLeft, FaCirclePlus, FaFloppyDisk } from 'react-icons/fa6'
+import { Panel, useReactFlow } from 'reactflow'
 import { motion } from 'framer-motion'
 
-function Navbar ({ setNodes }) {
+function Navbar ({ setNodes, setEdges, rfInstance }) {
+  const flowKey = 'Flow'
+  const { setViewport } = useReactFlow()
   const getNodeId = () => `ID_${+new Date()}`
 
   const onAdd = useCallback(() => {
@@ -21,10 +23,38 @@ function Navbar ({ setNodes }) {
     setNodes((nds) => nds.concat(newNode))
   }, [setNodes])
 
+  const onSave = useCallback(() => {
+    if (rfInstance) {
+      const flow = rfInstance.toObject()
+      localStorage.setItem(flowKey, JSON.stringify(flow))
+    }
+  }, [rfInstance])
+
+  const onRestore = useCallback(() => {
+    const restoreFlow = async () => {
+      const flow = JSON.parse(localStorage.getItem(flowKey))
+
+      if (flow) {
+        const { x = 0, y = 0, zoom = 1 } = flow.viewport
+        setNodes(flow.nodes || [])
+        setEdges(flow.edges || [])
+        setViewport({ x, y, zoom })
+      }
+    }
+
+    restoreFlow()
+  }, [setNodes, setViewport])
+
+  useEffect(() => {
+    onSave()
+  }, [])
+
   return (
     <Panel position='top-center'>
-      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
-        <Button icon={<FaCirclePlus />} onClick={onAdd} />
+      <motion.div className='nav' initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+        <Button icon={<FaCirclePlus />} onClick={onAdd} title='Añadir un Nuevo Nodo' />
+        <Button icon={<FaArrowRotateLeft />} onClick={onRestore} title='Restaurar Cambios' />
+        <Button icon={<FaFloppyDisk />} onClick={onSave} title='Guardar Cambios' />
       </motion.div>
     </Panel>
   )

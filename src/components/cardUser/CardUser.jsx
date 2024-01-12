@@ -16,6 +16,7 @@ function CardUser ({ data, id }) {
       <Handle type='target' position={Position.Top} />
       <motion.div
         className='User' initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        title='Nodo Persona'
       >
         <img src={data?.img} alt='' />
         <div className='UserText'>

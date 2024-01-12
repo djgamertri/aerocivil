@@ -10,6 +10,7 @@ function App () {
       <Routes>
         <Route path='/' element={<Canva />} />
         <Route path='/profile/:id' element={<Profile />} />
+        <Route path='*' element={<Canva />} />
       </Routes>
     </>
   )
