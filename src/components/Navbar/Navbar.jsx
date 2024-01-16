@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import './Navbar.css'
 import Button from '../Button/Button'
 import { FaArrowRotateLeft, FaCirclePlus, FaFloppyDisk } from 'react-icons/fa6'
