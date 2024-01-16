@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { edgeTypes, initialEdges, initialNodes, nodeTypes } from '../assets/data'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { edgeTypes, nodeTypes } from '../assets/data'
 import { useAuth0 } from '@auth0/auth0-react'
 import { FaUser } from 'react-icons/fa6'
 import Button from '../components/Button/Button'
@@ -21,11 +21,23 @@ import ReactFlow, {
   getConnectedEdges
 } from 'reactflow'
 import Form from '../components/Form/Form'
+import socket from '../assets/socket'
 
 function Canva () {
+  useEffect(() => {
+    socket.on('initialData', (data) => {
+      setNodes(data.nodes)
+      setEdges(data.edges)
+    })
+
+    return () => {
+      socket.off('initialData')
+    }
+  }, [])
+
   const edgeUpdateSuccessful = useRef(true)
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+  const [nodes, setNodes, onNodesChange] = useNodesState()
+  const [edges, setEdges, onEdgesChange] = useEdgesState()
   const [editingNodeId, setEditingNodeId] = useState(null)
   const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '' })
   const [rfInstance, setRfInstance] = useState(null)

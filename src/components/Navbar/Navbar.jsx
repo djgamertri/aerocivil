@@ -4,6 +4,7 @@ import Button from '../Button/Button'
 import { FaArrowRotateLeft, FaCirclePlus, FaFloppyDisk } from 'react-icons/fa6'
 import { Panel, useReactFlow } from 'reactflow'
 import { motion } from 'framer-motion'
+import socket from '../../assets/socket'
 
 function Navbar ({ setNodes, setEdges, rfInstance }) {
   const flowKey = 'Flow'
@@ -27,6 +28,7 @@ function Navbar ({ setNodes, setEdges, rfInstance }) {
     if (rfInstance) {
       const flow = rfInstance.toObject()
       localStorage.setItem(flowKey, JSON.stringify(flow))
+      socket.emit('save', flow)
     }
   }, [rfInstance])
 
