@@ -1,8 +1,6 @@
 import io from 'socket.io-client'
-import dotenv from 'dotenv'
 
-dotenv.config()
-const LINK = process.env.SOCKET || ''
+const LINK = 'https://aerocivil.onrender.com/'
 
 const socket = io(LINK)
 
