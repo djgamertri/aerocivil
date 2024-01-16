@@ -1,5 +1,9 @@
 import io from 'socket.io-client'
+import dotenv from 'dotenv'
 
-const socket = io('https://aerocivil-server.vercel.app/')
+dotenv.config()
+const LINK = process.env.SOCKET || ''
+
+const socket = io(LINK)
 
 export default socket
