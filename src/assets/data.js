@@ -7,6 +7,7 @@ export const userInfo = [
     name: 'Esmeralda Molina Gomez',
     rol: 'Secretaria General',
     img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg',
+    opcion: '1',
     Text: [
       {
         title: 'Historia Laboral',
@@ -27,6 +28,7 @@ export const userInfo = [
     name: 'Jhon Doe',
     rol: 'Director de Operaciones',
     img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg',
+    opcion: '1',
     Text: [
       {
         title: 'Historia Laboral',
@@ -47,6 +49,7 @@ export const userInfo = [
     name: 'Jhon Doe',
     rol: 'Gerente de Marketing',
     img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg',
+    opcion: '1',
     Text: [
       {
         title: 'Historia Laboral',
@@ -67,6 +70,7 @@ export const userInfo = [
     name: 'Jhon Doe',
     rol: 'Gerente de Recursos Humanos',
     img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg',
+    opcion: '1',
     Text: [
       {
         title: 'Historia Laboral',

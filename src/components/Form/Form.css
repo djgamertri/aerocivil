@@ -15,7 +15,10 @@
 .node-editor label {
     font-size: .9rem;
 }
-.node-editor input, textarea {
+.node-editor select {
+    font-size: .9rem;
+}
+.node-editor input, textarea, select {
   padding: 8px;
   margin-bottom: 10px;
   resize: none;

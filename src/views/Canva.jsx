@@ -52,9 +52,8 @@ function Canva () {
   }, [])
 
   const onEdgeUpdate = useCallback((oldEdge, newConnection) => {
-    edgeUpdateSuccessful.current = true
-    setEdges((els) => updateEdge(oldEdge, newConnection, els))
-  }, [])
+    setEdges((oldEdges) => updateEdge(oldEdge, newConnection, oldEdges))
+  }, [setEdges])
 
   const onEdgeUpdateEnd = useCallback((_, edge) => {
     if (!edgeUpdateSuccessful.current) {
@@ -85,10 +84,14 @@ function Canva () {
     [nodes, edges]
   )
 
+  const handleEdgeUpdate = (oldEdge, newConnection) => {
+    console.log('Edge actualizado:', oldEdge, newConnection)
+  }
+
   const handleNodeBlur = (event) => {
     if (event.relatedTarget && event.relatedTarget.type !== 'text') {
       setEditingNodeId(null)
-      setEditNodeInfo({ name: '', rol: '' })
+      setEditNodeInfo({ name: '', rol: '', img: '' })
     }
   }
 
@@ -97,7 +100,7 @@ function Canva () {
     event.preventDefault()
 
     setEditingNodeId(node.id)
-    setEditNodeInfo({ name: node.data.name, rol: node.data.rol })
+    setEditNodeInfo({ name: node.data.name, rol: node.data.rol, img: node.data.img })
   }
 
   const handleNodeChange = (event) => {
@@ -117,12 +120,23 @@ function Canva () {
 
     setNodes(updatedNodes)
     setEditingNodeId(null)
-    setEditNodeInfo({ name: '', rol: '' })
+    setEditNodeInfo({ name: '', rol: '', img: '' })
   }
 
   const handleCloseForm = () => {
     setEditingNodeId(null)
-    setEditNodeInfo({ name: '', rol: '' })
+    setEditNodeInfo({ name: '', rol: '', img: '' })
+  }
+
+  // ! Cositas Para Los Edges
+  const handleEdgeDragStart = (edge, event) => {
+    edge.startX = event.clientX
+    edge.startY = event.clientY
+  }
+
+  const handleEdgeMouseMove = (edge, event) => {
+    edge.x = edge.startX + (event.clientX - edge.startX)
+    edge.y = edge.startY + (event.clientY - edge.startY)
   }
 
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0()
@@ -147,6 +161,11 @@ function Canva () {
         fitViewOptions={{ padding: 0.4 }}
         fitView
         onInit={setRfInstance}
+        onLoad={handleEdgeUpdate}
+        minZoom={0}
+        maxZoom={Infinity}
+        onEdgeDragStart={handleEdgeDragStart}
+        onEdgeMouseMove={handleEdgeMouseMove}
       >
         {isAuthenticated ? <Profile /> : <Panel position='top-right'><Button icon={<FaUser />} onClick={() => loginWithRedirect()} title='Ingresar al Sisitema' /></Panel>}
         <Navbar setNodes={setNodes} setEdges={setEdges} rfInstance={rfInstance} />

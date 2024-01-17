@@ -39,3 +39,11 @@
     padding: 40px 30px 30px 30px;
     cursor: pointer;
 }
+
+.estilos-opcion1{
+    border-color: blue;
+}
+
+.estilos-opcion2{
+    border-color: black;
+}
