@@ -24,23 +24,22 @@ import Form from '../components/Form/Form'
 import socket from '../assets/socket'
 
 function Canva () {
-  useEffect(() => {
-    socket.on('initialData', (data) => {
-      setNodes(data.nodes)
-      setEdges(data.edges)
-    })
-
-    return () => {
-      socket.off('initialData')
-    }
-  }, [])
-
   const edgeUpdateSuccessful = useRef(true)
   const [nodes, setNodes, onNodesChange] = useNodesState()
   const [edges, setEdges, onEdgesChange] = useEdgesState()
   const [editingNodeId, setEditingNodeId] = useState(null)
   const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '' })
   const [rfInstance, setRfInstance] = useState(null)
+
+  useEffect(() => {
+    if (!nodes) {
+      socket.emit('reloadCanvas')
+    }
+    socket.on('Canvas', (data) => {
+      setNodes(data.nodes)
+      setEdges(data.edges)
+    })
+  }, [setNodes, setEdges])
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
