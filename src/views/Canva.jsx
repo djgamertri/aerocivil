@@ -128,7 +128,6 @@ function Canva () {
     setEditNodeInfo({ name: '', rol: '', img: '' })
   }
 
-  // ! Cositas Para Los Edges
   const handleEdgeDragStart = (edge, event) => {
     edge.startX = event.clientX
     edge.startY = event.clientY
