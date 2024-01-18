@@ -19,7 +19,7 @@ function CardUser ({ data, id, selectOption }) {
     <>
       <Handle type='target' position={Position.Top} />
       <motion.div
-        className={`User ${selectOption === '1' ? 'estilos-opcion1' : 'estilos-opcion2'}`}
+        className={`User ${data.typeUser === 'Planta' ? 'Planta' : 'Contratista'}`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}

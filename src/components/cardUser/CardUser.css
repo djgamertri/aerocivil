@@ -40,10 +40,11 @@
     cursor: pointer;
 }
 
-.estilos-opcion1{
-    border-color: blue;
+.Planta, .Planta img{
+    border-color: blue !important;
 }
 
-.estilos-opcion2{
-    border-color: black;
+.Contratista, .Planta img{
+    border-color: black !important;
 }
+

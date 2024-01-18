@@ -15,7 +15,7 @@ function Navbar ({ setNodes, setEdges, rfInstance }) {
     const newNode = {
       id: getNodeId(),
       type: 'User',
-      data: { name: 'Nombre completo', rol: 'Papel, función o posición que desempeña', img: 'https://placehold.co/100x100' },
+      data: { name: 'Nombre completo', rol: 'Papel, función o posición que desempeña', img: 'https://placehold.co/100x100', typeUser: 'Planta' },
       position: {
         x: Math.random() * window.innerWidth - 100,
         y: Math.random() * window.innerHeight
