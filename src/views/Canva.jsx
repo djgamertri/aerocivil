@@ -39,6 +39,10 @@ function Canva () {
       setNodes(data.nodes)
       setEdges(data.edges)
     })
+
+    return () => {
+      socket.off('Canvas')
+    }
   }, [setNodes, setEdges])
 
   const onConnect = useCallback(
@@ -136,12 +140,6 @@ function Canva () {
     edge.x = edge.startX + (event.clientX - edge.startX)
     edge.y = edge.startY + (event.clientY - edge.startY)
   }
-  const handleNodeDrag = () => {
-    socket.emit('canvasUpdate', {
-      nodes,
-      edges
-    })
-  }
 
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0()
 
@@ -168,7 +166,6 @@ function Canva () {
         onLoad={handleEdgeUpdate}
         minZoom={0}
         maxZoom={Infinity}
-        onNodeDrag={handleNodeDrag}
         onEdgeDragStart={handleEdgeDragStart}
         onEdgeMouseMove={handleEdgeMouseMove}
       >

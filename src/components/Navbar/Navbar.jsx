@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import './Navbar.css'
 import Button from '../Button/Button'
 import { FaArrowRotateLeft, FaCirclePlus, FaFloppyDisk } from 'react-icons/fa6'
@@ -46,6 +46,16 @@ function Navbar ({ setNodes, setEdges, rfInstance }) {
 
     restoreFlow()
   }, [setNodes, setViewport])
+
+  useEffect(() => {
+    socket.on('SaveInterval', () => {
+      console.log('paso')
+      onSave()
+    })
+    return () => {
+      socket.off('SaveInterval')
+    }
+  }, [onSave])
 
   return (
     <Panel position='top-center'>
