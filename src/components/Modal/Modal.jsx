@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Modal.css'
 import { FaArrowLeft } from 'react-icons/fa'
-import { userInfo } from '../../assets/data'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const Modal = ({ id }) => {
-  const user = userInfo.find((user) => user.id === id)
+  const [User, setUser] = useState([])
 
-  if (!user) {
-    return <div className='modal'><h2>Estas Intentando acceder a un perfil no creado</h2></div>
-  }
+  useEffect(() => {
+    fetch(`https://aerocivil.onrender.com/getNode/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setUser(data)
+      })
+      .catch(error => {
+        console.error('Error al buscar el nodo:', error)
+      })
+    if (!User) {
+      return <div className='modal'><h2>Estas Intentando acceder a un perfil no creado</h2></div>
+    }
+  }, [])
 
-  const { name, rol, img, Text } = user
+  const { name, rol, img, Text } = User
 
   return (
     <div>
@@ -30,7 +40,7 @@ const Modal = ({ id }) => {
           </div>
         </motion.div>
         <motion.div className='HistoryText' initial={{ scale: 0, translateY: 500 }} animate={{ scale: 1, translateY: 0 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
-          {Text.map((item, index) => (
+          {Text?.map((item, index) => (
             <motion.div
               key={index} initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}

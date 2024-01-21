@@ -31,7 +31,6 @@ function Canva () {
   const [editingNodeId, setEditingNodeId] = useState(null)
   const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '', img: '', typeUser: '' })
   const [rfInstance, setRfInstance] = useState(null)
-  console.log(editNodeInfo)
 
   useEffect(() => {
     if (!nodes) {
@@ -118,8 +117,6 @@ function Canva () {
     const updatedNodes = nodes.map((n) =>
       n.id === editingNodeId ? { ...n, data: { ...n.data, ...editNodeInfo } } : n
     )
-
-    console.log(updatedNodes)
 
     setNodes(updatedNodes)
     setEditingNodeId(null)
