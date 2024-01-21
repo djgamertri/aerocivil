@@ -1,16 +1,16 @@
 import React from 'react'
 import { Route, Routes } from 'react-router'
 import Profile from './views/Profile'
-import Canva from './views/Canva'
+import AuthCanva from './views/AuthCanva'
 import './App.css'
 
 function App () {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Canva />} />
+        <Route path='/' element={<AuthCanva />} />
         <Route path='/profile/:id' element={<Profile />} />
-        <Route path='*' element={<Canva />} />
+        <Route path='*' element={<AuthCanva />} />
       </Routes>
     </>
   )

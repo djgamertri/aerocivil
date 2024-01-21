@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 function Profile ({ icon }) {
   const { user, logout } = useAuth0()
 
-  const [logoutVisible, setLogoutVisible] = useState(false)
+  const [, setLogoutVisible] = useState(false)
 
   const handleMouseEnter = () => {
     setLogoutVisible(true)
@@ -18,8 +18,6 @@ function Profile ({ icon }) {
   const handleMouseLeave = () => {
     setLogoutVisible(false)
   }
-
-  console.log(logoutVisible)
 
   return (
     <Panel position='top-right'>

@@ -1,25 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './CardUser.css'
 import { Handle, Position } from 'reactflow'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-function CardUser ({ data, id, selectOption }) {
+function CardUser ({ data, id }) {
   const navigate = useNavigate()
 
   const handleNameClick = () => {
     navigate(`/Profile/${id}`)
   }
 
-  useEffect(() => {
-    console.log('Select Option Card User: ', selectOption)
-  }, [selectOption])
-
   return (
     <>
       <Handle type='target' position={Position.Top} />
       <motion.div
-        className={`User ${data.typeUser === 'Planta' ? 'Planta' : 'Contratista'}`}
+        className={`User ${data.typeUser}`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}

@@ -41,10 +41,13 @@
 }
 
 .Planta, .Planta img{
-    border-color: blue !important;
+    border-color: #3a86ff !important;
 }
 
-.Contratista, .Planta img{
-    border-color: black !important;
+.Contratista, .Contratista img{
+    border-color: #fb5607 !important;
 }
 
+.Vacante, .Vacante img{
+    border-color: #8ac926 !important;
+}

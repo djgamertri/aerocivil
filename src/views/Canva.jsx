@@ -22,14 +22,16 @@ import ReactFlow, {
 } from 'reactflow'
 import Form from '../components/Form/Form'
 import socket from '../assets/socket'
+import Colors from '../components/Colors/Colors'
 
 function Canva () {
   const edgeUpdateSuccessful = useRef(true)
   const [nodes, setNodes, onNodesChange] = useNodesState()
   const [edges, setEdges, onEdgesChange] = useEdgesState()
   const [editingNodeId, setEditingNodeId] = useState(null)
-  const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '' })
+  const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '', img: '', typeUser: '' })
   const [rfInstance, setRfInstance] = useState(null)
+  console.log(editNodeInfo)
 
   useEffect(() => {
     if (!nodes) {
@@ -87,14 +89,10 @@ function Canva () {
     [nodes, edges]
   )
 
-  const handleEdgeUpdate = (oldEdge, newConnection) => {
-    console.log('Edge actualizado:', oldEdge, newConnection)
-  }
-
   const handleNodeBlur = (event) => {
     if (event.relatedTarget && event.relatedTarget.type !== 'text') {
       setEditingNodeId(null)
-      setEditNodeInfo({ name: '', rol: '', img: '' })
+      setEditNodeInfo({ name: '', rol: '', img: '', typeUser: '' })
     }
   }
 
@@ -103,7 +101,7 @@ function Canva () {
     event.preventDefault()
 
     setEditingNodeId(node.id)
-    setEditNodeInfo({ name: node.data.name, rol: node.data.rol, img: node.data.img })
+    setEditNodeInfo({ name: node.data.name, rol: node.data.rol, img: node.data.img, typeUser: node.data.typeUser })
   }
 
   const handleNodeChange = (event) => {
@@ -121,24 +119,16 @@ function Canva () {
       n.id === editingNodeId ? { ...n, data: { ...n.data, ...editNodeInfo } } : n
     )
 
+    console.log(updatedNodes)
+
     setNodes(updatedNodes)
     setEditingNodeId(null)
-    setEditNodeInfo({ name: '', rol: '', img: '' })
+    setEditNodeInfo({ name: '', rol: '', img: '', typeUser: '' })
   }
 
   const handleCloseForm = () => {
     setEditingNodeId(null)
-    setEditNodeInfo({ name: '', rol: '', img: '' })
-  }
-
-  const handleEdgeDragStart = (edge, event) => {
-    edge.startX = event.clientX
-    edge.startY = event.clientY
-  }
-
-  const handleEdgeMouseMove = (edge, event) => {
-    edge.x = edge.startX + (event.clientX - edge.startX)
-    edge.y = edge.startY + (event.clientY - edge.startY)
+    setEditNodeInfo({ name: '', rol: '', img: '', typeUser: '' })
   }
 
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0()
@@ -163,13 +153,11 @@ function Canva () {
         fitViewOptions={{ padding: 0.4 }}
         fitView
         onInit={setRfInstance}
-        onLoad={handleEdgeUpdate}
         minZoom={0}
         maxZoom={Infinity}
-        onEdgeDragStart={handleEdgeDragStart}
-        onEdgeMouseMove={handleEdgeMouseMove}
       >
         {isAuthenticated ? <Profile /> : <Panel position='top-right'><Button icon={<FaUser />} onClick={() => loginWithRedirect()} title='Ingresar al Sisitema' /></Panel>}
+        <Colors />
         <Navbar setNodes={setNodes} setEdges={setEdges} rfInstance={rfInstance} />
         <Controls />
         <MiniMap />

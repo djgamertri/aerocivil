@@ -1,0 +1,26 @@
+.Palet{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0;
+}
+.PaletContainer{
+    background: #fefefe;
+    padding: 4px 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    box-shadow: 10px 10px 34px -21px rgba(0,0,0,0.71);
+}
+.Color{
+    width: 20px;
+    height: 20px; margin-right: 10px;
+}
+.P{
+    background: #3a86ff;
+}
+.C{
+    background: #fb5607;
+}
+.V{
+    background: #8ac926;
+}
