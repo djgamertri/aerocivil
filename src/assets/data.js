@@ -49,7 +49,7 @@ export const userInfo = [
     name: 'Jhon Doe',
     rol: 'Gerente de Marketing',
     img: 'https://economia3.com/wp-content/uploads/2019/12/Natalia-Juarranz-EQUIPO-HUMANO.jpg',
-    typeUser: 'Planta',
+    typeUser: 'Contratista',
     Text: [
       {
         title: 'Historia Laboral',

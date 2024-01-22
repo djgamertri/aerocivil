@@ -44,7 +44,11 @@
     border-color: blue !important;
 }
 
-.Contratista, .Planta img{
-    border-color: black !important;
+.Contratista, .Contratista img{
+    border-color: orange !important;
+}
+
+.Vacante, .Vacante img{
+    border-color: gray !important;
 }
 

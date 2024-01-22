@@ -12,14 +12,19 @@ function CardUser ({ data, id, selectOption }) {
   }
 
   useEffect(() => {
-    console.log('Select Option Card User: ', selectOption)
-  }, [selectOption])
+    console.log('Select Option Card User: ', data.typeUser)
+    console.log('Opcion De Data: ', data.typeUser)
+  }, [selectOption, data.typeUser])
 
   return (
     <>
       <Handle type='target' position={Position.Top} />
       <motion.div
-        className={`User ${data.typeUser === 'Planta' ? 'Planta' : 'Contratista'}`}
+        className={`User ${data.typeUser === 'Planta'
+        ? 'Planta'
+        : data.typeUser === 'Contratista'
+        ? 'Contratista'
+        : 'Vacante'}`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}

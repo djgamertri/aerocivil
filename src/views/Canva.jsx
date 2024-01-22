@@ -28,8 +28,9 @@ function Canva () {
   const [nodes, setNodes, onNodesChange] = useNodesState()
   const [edges, setEdges, onEdgesChange] = useEdgesState()
   const [editingNodeId, setEditingNodeId] = useState(null)
-  const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '' })
+  const [editNodeInfo, setEditNodeInfo] = useState({ name: '', rol: '', img: '' })
   const [rfInstance, setRfInstance] = useState(null)
+  const [selectedOption, setSelectedOption] = useState(editNodeInfo.typeUser)
 
   useEffect(() => {
     if (!nodes) {
@@ -87,10 +88,11 @@ function Canva () {
     console.log('Edge actualizado:', oldEdge, newConnection)
   }
 
+  // ---------------------- Edit Card User ----------------------
   const handleNodeBlur = (event) => {
     if (event.relatedTarget && event.relatedTarget.type !== 'text') {
       setEditingNodeId(null)
-      setEditNodeInfo({ name: '', rol: '', img: '' })
+      setEditNodeInfo({ name: '', rol: '', img: '', typeUser: '' })
     }
   }
 
@@ -99,7 +101,7 @@ function Canva () {
     event.preventDefault()
 
     setEditingNodeId(node.id)
-    setEditNodeInfo({ name: node.data.name, rol: node.data.rol, img: node.data.img })
+    setEditNodeInfo({ name: node.data.name, rol: node.data.rol, img: node.data.img, typeUser: node.data.typeUser })
   }
 
   const handleNodeChange = (event) => {
@@ -119,35 +121,27 @@ function Canva () {
 
     setNodes(updatedNodes)
     setEditingNodeId(null)
-    setEditNodeInfo({ name: '', rol: '', img: '' })
+    setEditNodeInfo({ name: '', rol: '', img: '', typeUser: '' })
   }
 
   const handleCloseForm = () => {
     setEditingNodeId(null)
-    setEditNodeInfo({ name: '', rol: '', img: '' })
+    setEditNodeInfo({ name: '', rol: '', img: '', typeUser: '' })
   }
 
-  const handleEdgeDragStart = (edge, event) => {
-    edge.startX = event.clientX
-    edge.startY = event.clientY
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value)
+    console.log('selectOption:', event.target.value)
   }
 
-  const handleEdgeMouseMove = (edge, event) => {
-    edge.x = edge.startX + (event.clientX - edge.startX)
-    edge.y = edge.startY + (event.clientY - edge.startY)
-  }
-  const handleNodeDrag = () => {
-    socket.emit('canvasUpdate', {
-      nodes,
-      edges
-    })
-  }
+  // ---------------------- Edit Form Modal ----------------------
 
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0()
 
   if (isLoading) return <Loading />
 
   return (
+
     <div style={{ width: '100%', height: '100vh' }}>
       <ReactFlow
         nodes={nodes}
@@ -168,20 +162,19 @@ function Canva () {
         onLoad={handleEdgeUpdate}
         minZoom={0}
         maxZoom={Infinity}
-        onNodeDrag={handleNodeDrag}
-        onEdgeDragStart={handleEdgeDragStart}
-        onEdgeMouseMove={handleEdgeMouseMove}
       >
         {isAuthenticated ? <Profile /> : <Panel position='top-right'><Button icon={<FaUser />} onClick={() => loginWithRedirect()} title='Ingresar al Sisitema' /></Panel>}
         <Navbar setNodes={setNodes} setEdges={setEdges} rfInstance={rfInstance} />
         <Controls />
         <MiniMap />
         {editingNodeId && (
-          <Form handleCloseForm={handleCloseForm} editNodeInfo={editNodeInfo} handleNodeChange={handleNodeChange} handleNodeBlur={handleNodeBlur} handleSaveChanges={handleSaveChanges} />
-        )}
+          <Form handleCloseForm={handleCloseForm} editNodeInfo={editNodeInfo} handleNodeChange={handleNodeChange} handleNodeBlur={handleNodeBlur} handleSaveChanges={handleSaveChanges} handleSelectChange={handleSelectChange} selectOption={selectedOption} />
+        )},
+
         <Background variant='dots' gap={12} size={1} />
       </ReactFlow>
     </div>
+
   )
 }
 
